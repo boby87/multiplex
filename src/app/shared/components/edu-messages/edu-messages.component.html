@@ -1,0 +1,15 @@
+<div class="edu-messages-container">
+  <div class="messages-mask">
+    <div class="messages-scroll">
+      @for (message of duplicatedMessages; track message) {
+        <div class="edu-message">
+          <div class="message-content">
+            <p class="message-text font-size-16">
+              {{ message }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

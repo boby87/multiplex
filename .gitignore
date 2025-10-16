@@ -1,0 +1,200 @@
+# ==========================
+# 🐍 1. Python
+# ==========================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.installed.cfg
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# ==========================
+# ☕ 2. Java (Maven / Gradle)
+# ==========================
+*.class
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+gradle-app.setting
+
+# IntelliJ IDEA Java caches
+.idea/
+*.iml
+*.iws
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+*.springBeans
+
+# Lombok cache
+.lombok-cache/
+
+# ==========================
+# 🌐 3. Angular (Node.js, npm, dist)
+# ==========================
+node_modules/
+dist/
+.angular/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vscode/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+src/environments/environment*.ts
+
+# Angular build files
+.angular/
+.angular/cache/
+
+# ==========================
+# 📱 4. Flutter (Dart, Android, iOS)
+# ==========================
+# Flutter build files
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.packages
+.persistent_state
+pubspec.lock
+
+# iOS files
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/App.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/ephemeral/
+
+# Android files
+android/.gradle/
+android/app/*.iml
+android/local.properties
+android/.idea/
+android/app/build/
+android/gradle/wrapper/gradle-wrapper.properties
+
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+*.DS_Store
+*.log
+.vscode/
+
+# ==========================
+# 🛠 5. IDE courants (VSCode, IntelliJ, Eclipse)
+# ==========================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# ==========================
+# Terraform
+# ==========================
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Crash logs
+crash.log
+
+# Ignore overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore plan files
+*.tfplan
+
+# Ignore sensitive files
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+
+# Ignore logs and debug output
+.terraformrc
+.terraform.d/
+terraform.log
+
+# ==========================
+# Ansible
+# ==========================
+# Inventory files that may contain sensitive data
+#inventory/
+hosts
+*.vault
+
+# Ansible logs and facts cache
+*.retry
+*.log
+fact_cache/
+
+# Encrypted files (vault)
+*.vault.yml
+*.vault.yaml

@@ -1,0 +1,107 @@
+<form [formGroup]="form()">
+  <div class="row">
+    @for (field of fields(); track field.key) {
+      <div [class]="'mb-3 ' + field.classColumn">
+        @if (field.controlType === 'formArray' && field.childrenFields) {
+          <div [formArrayName]="field.key">
+            @for (group of getFormArray(field.key).controls; track i; let i = $index) {
+              <div [formGroupName]="i" class=" mb-3 position-relative">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger  position-absolute close-button-corner"
+                  (click)="removeFormArrayItem(field.key, i)"
+                  [disabled]="getFormArray(field.key).length <= (field.initialAddCount || 1)"
+                  title="Supprimer"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+                <div class="row">
+                  @for (child of field.childrenFields; track child.key) {
+                    <div [class]="child.classColumn">
+                      @if (child.controlType === 'formGroup' && child.groupFields) {
+                        <div [formGroupName]="child.key" class="row">
+                          @for (groupField of child.groupFields; track groupField.key) {
+                            <div [class]="groupField.classColumn">
+                              <app-dynamic-field
+                                [field]="groupField"
+                                [formGroup]="getNestedFormGroup(field.key, i, child.key)"
+                              ></app-dynamic-field>
+                            </div>
+                          }
+                        </div>
+                      } @else if (child.controlType === 'formArray' && child.childrenFields) {
+                        <div [formArrayName]="child.key">
+                          @for (
+                            subGroup of getNestedFormArray(field.key, i, child.key).controls;
+                            track j;
+                            let j = $index
+                          ) {
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-danger close-button-corner"
+                              (click)="removeNestedFormArrayItem(field.key, i, child.key, j)"
+                              [disabled]="
+                                getNestedFormArray(field.key, i, child.key).length <=
+                                (child.initialAddCount || 1)
+                              "
+                              title="Supprimer"
+                            >
+                              <i class="fas fa-times"></i>
+                            </button>
+
+                            <div [formGroupName]="j" class="row mb-2 position-relative">
+                              @for (nestedField of child.childrenFields; track nestedField.key) {
+                                <div [class]="nestedField.classColumn">
+                                  <app-dynamic-field
+                                    [field]="nestedField"
+                                    [formGroup]="
+                                      getNestedFormGroupFromArray(field.key, i, child.key, j)
+                                    "
+                                  ></app-dynamic-field>
+                                </div>
+                              }
+                            </div>
+                          }
+                          <button
+                            type="button"
+                            class="btn btn-link text-primary p-0 mt-2 d-flex align-items-center"
+                            (click)="addNestedFormArrayItem(field.key, i, child)">
+                            <i class="fas fa-plus me-1"></i>
+                            Ajouter un autre {{ child.label | translate }}
+                          </button>
+
+                        </div>
+                      } @else {
+                        <app-dynamic-field
+                          [field]="child"
+                          [formGroup]="getFormGroupFromArray(field.key, i)"
+                        ></app-dynamic-field>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+            <button
+              type="button"
+              class="btn btn-link text-primary p-0 mt-2 d-flex align-items-center"
+              (click)="addFormArrayItem(field.key, field.childrenFields)">
+              <i class="fa fa-plus me-1"></i> <!-- icône bootstrap -->
+              Ajouter un autre {{ field.label | translate }}
+            </button>
+
+          </div>
+        } @else if (field.controlType === 'formGroup' && field.groupFields) {
+          <div [formGroupName]="field.key" class="row">
+                <app-dynamic-form-group
+                  [fields]="field.groupFields"
+                  [form]="getFormGroup(field.key)"
+                ></app-dynamic-form-group>
+          </div>
+        } @else {
+          <app-dynamic-field [field]="field" [formGroup]="form()"></app-dynamic-field>
+        }
+      </div>
+    }
+  </div>
+</form>

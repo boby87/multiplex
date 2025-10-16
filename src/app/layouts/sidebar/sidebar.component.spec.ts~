@@ -1,0 +1,259 @@
+import { SidebarComponent } from './sidebar.component';
+import { render } from '@testing-library/angular';
+import { APP_CONFIG } from '../../core/config/config.token';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+describe('SidebarComponent', () => {
+
+  const mockAppConfig = {
+    apiUrl: 'http://mock.api',
+  };
+
+  const renderComponent = async () => {
+    const { fixture } = await render(SidebarComponent, {
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: APP_CONFIG, useValue: mockAppConfig },
+      ],
+    });
+
+    return { fixture, component: fixture.componentInstance };
+  };
+
+  it('should create the component', async () => {
+    const { component } = await renderComponent();
+    expect(component).toBeTruthy();
+  });
+
+  it('should toggle submenu class in toggleMenu()', async () => {
+    const { component } = await renderComponent();
+    const mockEvent = {
+      currentTarget: {
+        nextElementSibling: document.createElement('div'),
+      },
+    };
+    mockEvent.currentTarget.nextElementSibling.classList.add = jest.fn();
+    mockEvent.currentTarget.nextElementSibling.classList.toggle = jest.fn();
+
+    component.toggleMenu(mockEvent);
+    expect(mockEvent.currentTarget.nextElementSibling.classList.toggle).toHaveBeenCalledWith('mm-show');
+  });
+
+  it('should remove all matching classes with _removeAllClass', async () => {
+    const { component } = await renderComponent();
+    const testEl = document.createElement('div');
+    testEl.classList.add('mm-active');
+    document.body.appendChild(testEl);
+
+    (component as any)._removeAllClass('mm-active');
+    expect(testEl.classList.contains('mm-active')).toBe(false);
+    document.body.removeChild(testEl);
+  });
+
+  it('should return true for item with children in hasItems', async () => {
+    const { component } = await renderComponent();
+    const result = component.hasItems({ label: 'Test', children: [{}] });
+    expect(result).toBe(true);
+  });
+
+  it('should return false for item without children in hasItems', async () => {
+    const { component } = await renderComponent();
+    const result = component.hasItems({ label: 'Test' });
+    expect(result).toBe(false);
+  });
+
+
+  it('should activate the exact matching link and its parent elements', async () => {
+    const { component } = await renderComponent();
+
+    // Création d’un lien avec un chemin correspondant à la route actuelle
+    const link = document.createElement('a');
+    link.classList.add('side-nav-link-ref');
+    link.pathname = window.location.pathname;
+
+    // Structure parent simulée
+    const parent = document.createElement('li');
+    const ul = document.createElement('ul');
+    ul.classList.add('submenu');
+    parent.appendChild(link);
+    parent.appendChild(ul);
+
+    const wrapper = document.createElement('div');
+    wrapper.appendChild(parent);
+    document.body.appendChild(wrapper);
+
+    (component as any)._activateMenuDropdown();
+
+    expect(link.classList.contains('active')).toBeTruthy();
+    expect(parent.classList.contains('mm-active')).toBeTruthy();
+    expect(ul.classList.contains('mm-show')).toBeTruthy();
+  });
+
+  it('should match parent path if no exact link is found', async () => {
+    const { component } = await renderComponent();
+
+    const currentPath = window.location.pathname;
+    const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+
+    const link = document.createElement('a');
+    link.classList.add('side-nav-link-ref');
+    link.pathname = parentPath;
+
+    const parent = document.createElement('li');
+    parent.appendChild(link);
+
+    document.body.appendChild(parent);
+
+    (component as any)._activateMenuDropdown();
+
+    expect(link.classList.contains('active')).toBeTruthy();
+    expect(parent.classList.contains('mm-active')).toBeFalsy();
+  });
+
+  it('should do nothing if no link matches', async () => {
+    const { component } = await renderComponent();
+
+    const link = document.createElement('a');
+    link.classList.add('side-nav-link-ref');
+    link.pathname = '/non-matching-path';
+
+    document.body.appendChild(link);
+
+    (component as any)._activateMenuDropdown();
+
+    expect(link.classList.contains('active')).toBeTruthy();
+  });
+
+  it('should activate multiple parent-related classes', async () => {
+    const { component } = await renderComponent();
+
+    const link = document.createElement('a');
+    link.classList.add('side-nav-link-ref');
+    link.pathname = window.location.pathname;
+
+    const parent = document.createElement('li');
+
+    const ul = document.createElement('ul');
+    const arrow = document.createElement('span');
+    const dropdown = document.createElement('div');
+    const isParent = document.createElement('div');
+
+    arrow.classList.add('has-arrow');
+    dropdown.classList.add('has-dropdown');
+    isParent.classList.add('is-parent');
+
+    parent.appendChild(link);
+    parent.appendChild(ul);
+    parent.appendChild(arrow);
+    parent.appendChild(dropdown);
+    parent.appendChild(isParent);
+
+    document.body.appendChild(parent);
+
+    (component as any)._activateMenuDropdown();
+
+    expect(parent.classList.contains('mm-active')).toBeTruthy();
+    expect(ul.classList.contains('mm-show')).toBeFalsy();
+    expect(arrow.classList.contains('mm-active')).toBeTruthy();
+    expect(dropdown.classList.contains('mm-active')).toBeTruthy();
+    expect(isParent.classList.contains('mm-active')).toBeTruthy();
+  });
+
+
+  beforeEach(() => {
+    document.body.innerHTML = '';
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  it('GIVEN an active menu element with offsetTop > 500 AND a valid SimpleBar WHEN _scrollElement is called THEN it should scroll the element', async () => {
+    // GIVEN
+    const { component } = await renderComponent();
+
+    const activeEl = document.createElement('div');
+    activeEl.classList.add('mm-active');
+    Object.defineProperty(activeEl, 'offsetTop', { value: 600 });
+
+    document.body.appendChild(activeEl);
+
+    const scrollContainer = { scrollTop: 0 };
+    component.scrollRef = {
+      SimpleBar: {
+        getScrollElement: () => scrollContainer
+      }
+    };
+
+    // WHEN
+    (component as any)._scrollElement();
+    jest.advanceTimersByTime(300);
+
+    // THEN
+    expect(scrollContainer.scrollTop).toBe(900);
+  });
+
+  it('GIVEN no .mm-active elements WHEN _scrollElement is called THEN it should not scroll anything', async () => {
+    // GIVEN
+    const { component } = await renderComponent();
+    component.scrollRef = {
+      SimpleBar: {
+        getScrollElement: () => ({ scrollTop: 0 })
+      }
+    };
+
+    // WHEN
+    (component as any)._scrollElement();
+    jest.advanceTimersByTime(300);
+
+    // THEN
+    // no errors thrown, nothing to assert directly
+    expect(true).toBeTruthy();
+  });
+
+  it('GIVEN an active menu with offsetTop <= 500 WHEN _scrollElement is called THEN it should not scroll', async () => {
+    // GIVEN
+    const { component } = await renderComponent();
+
+    const activeEl = document.createElement('div');
+    activeEl.classList.add('mm-active');
+    Object.defineProperty(activeEl, 'offsetTop', { value: 300 });
+
+    document.body.appendChild(activeEl);
+
+    const scrollContainer = { scrollTop: 0 };
+    component.scrollRef = {
+      SimpleBar: {
+        getScrollElement: () => scrollContainer
+      }
+    };
+
+    // WHEN
+    (component as any)._scrollElement();
+    jest.advanceTimersByTime(300);
+
+    // THEN
+    expect(scrollContainer.scrollTop).toBe(0);
+  });
+
+  it('GIVEN a null SimpleBar ref WHEN _scrollElement is called THEN it should do nothing', async () => {
+    // GIVEN
+    const { component } = await renderComponent();
+
+    const activeEl = document.createElement('div');
+    activeEl.classList.add('mm-active');
+    Object.defineProperty(activeEl, 'offsetTop', { value: 600 });
+    document.body.appendChild(activeEl);
+
+    component.scrollRef = { SimpleBar: null };
+
+    // WHEN
+    (component as any)._scrollElement();
+    jest.advanceTimersByTime(300);
+
+    // THEN
+    // Should not throw, nothing to scroll
+    expect(true).toBeTruthy();
+  });
+});

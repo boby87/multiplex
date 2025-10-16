@@ -1,0 +1,18 @@
+.status {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+
+  &.active {
+    background-color: #e6ffed;
+    color: #1e7e34;
+    border: 1px solid #28a745;
+  }
+
+  &.inactive {
+    background-color: #ffe6e6;
+    color: #a71d2a;
+    border: 1px solid #dc3545;
+  }
+}

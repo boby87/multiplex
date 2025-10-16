@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <app-page-title [title]="title()" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <div class="card">
+    <div class="card-body">
+      <div class="row d-flex justify-content-between">
+        <div class="col-sm-auto">
+          <app-search-box
+            [placeholder]="'Search projects...'"
+            (valueChange)="searchTerm.set($event)"
+          ></app-search-box>
+        </div>
+
+      </div>
+      <app-dynamic-table
+        [actions]="actions"
+        [columns]="columns()"
+        [filteredData]="filteredData()"
+      ></app-dynamic-table>
+    </div>
+  </div>
+  <!-- end row -->
+</div>

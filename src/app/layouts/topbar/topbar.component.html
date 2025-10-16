@@ -1,0 +1,223 @@
+<header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a routerLink="/" class="logo logo-dark">
+          <span class="logo-sm">
+            <img ngSrc="../../../assets/images/logo-type-blanc.png" priority width="518" alt="" height="418" />
+          </span>
+          <span class="logo-lg">
+            <img ngSrc="../../../assets/images/logo-type-blanc.png" priority width="518" alt="" height="418" />
+          </span>
+        </a>
+
+        <a routerLink="/" class="logo logo-light">
+          <span class="logo-sm">
+            <img
+              ngSrc="../../../assets/images/logo-type-blanc.png" priority width="40" alt="" height="30"
+            />
+          </span>
+          <span class="logo-lg">
+            <img
+              ngSrc="https://microfinance-ccm.com/iola/logo-blanc.png"
+              alt=""
+              width="207.517"
+              priority
+              height="40"
+            />
+          </span>
+        </a>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-sm px-3 font-size-16 header-item"
+        [ngClass]="{ 'd-none': false }"
+        id="vertical-menu-btn"
+        (click)="toggleMobileMenu($event)"
+      >
+        <i class="fa fa-fw fa-bars"></i>
+      </button>
+
+      <!-- App Search-->
+      <form class="app-search d-none d-lg-block">
+        <div class="position-relative">
+          <input type="text" class="form-control" placeholder="{{ 'HEADER.SEARCH' | translate }}" />
+          <span class="bx bx-search-alt"></span>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="d-flex">
+      <div class="dropdown d-inline-block d-lg-none ms-2" dropdown>
+        <button
+          type="button"
+          class="btn header-item noti-icon"
+          id="page-header-search-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          dropdownToggle
+          aria-expanded="false"
+        >
+          <i class="mdi mdi-magnify"></i>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+          *dropdownMenu
+          aria-labelledby="page-header-search-dropdown"
+        >
+          <form class="p-3">
+            <div class="m-0">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search ..."
+                  aria-label="Recipient's username"
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="mdi mdi-magnify"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block" dropdown>
+        <button
+          type="button"
+          class="btn header-item"
+          dropdownToggle
+          id="page-header-user-dropdown1"
+        >
+          <strong class="d-none d-xl-inline-block ms-1"> {{ userContext.currentCompanyId }} </strong>
+        </button>
+
+      </div>
+
+      <div class="dropdown d-inline-block" dropdown>
+        <button type="button" class="btn header-item" id="page-header-user-dropdown" dropdownToggle>
+          @if (flagvalue === undefined) {
+           {{flagvalue}}
+          } @else {
+           {{flagvalue}}
+          }
+        </button>
+        <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+          <!-- item-->
+          @for (item of listLang; track $index) {
+            <button
+              class="dropdown-item notify-item"
+              (click)="setLanguage(item.text, item.lang, item.flag)"
+              [ngClass]="{ active: cookieValue === item.lang }"
+            >
+              <span class="align-middle">{{ item.text }}</span>
+            </button>
+          }
+          <!-- item-->
+        </div>
+      </div>
+
+
+
+      <div class="dropdown d-inline-block" dropdown>
+        <button
+          type="button"
+          class="btn header-item noti-icon"
+          id="page-header-notifications-dropdown"
+          dropdownToggle
+        >
+          <i class="bx bx-bell bx-tada"></i>
+          <span class="badge bg-danger rounded-pill">{{ notifications().length }}</span>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+          aria-labelledby="page-header-notifications-dropdown"
+          *dropdownMenu
+        >
+          <div class="p-3">
+            <div class="row align-items-center">
+              <div class="col">
+                <h6 class="m-0">
+                  {{ 'HEADER.NOTIFICATIONS.TITLE' | translate }}
+                </h6>
+              </div>
+              <div class="col-auto">
+                <a class="small">{{ 'HEADER.NOTIFICATIONS.VIEW_ALL' | translate }}</a>
+              </div>
+            </div>
+          </div>
+          @if (notifications().length > 0) {
+            <ngx-simplebar style="position: relative; height: 230px">
+              @for (notification of notifications(); track notification.messageId) {
+                <button class="text-reset notification-item" (click)="updateMessage(notification)">
+                  <div class="d-flex">
+                    <div class="avatar-xs me-3">
+                      <span class="avatar-title bg-success rounded-circle font-size-16">
+                        <i class="bx bx-badge-check"></i>
+                      </span>
+                    </div>
+                    <div class="flex-grow-1">
+                      <h6 class="mb-1">
+                        {{ notification.notification?.title }}
+                      </h6>
+                      <div class="font-size-12 text-muted">
+                        <p class="mb-1">
+                          {{ notification.notification?.body }}
+                        </p>
+                        <p class="mb-0">
+                          <i class="mdi mdi-clock-outline"></i
+                          >{{ 'HEADER.NOTIFICATIONS.THIRD.TIME' | translate }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              }
+            </ngx-simplebar>
+          }
+          <div class="p-2 border-top d-grid">
+            <a class="btn btn-sm btn-link font-size-14 text-center">
+              <i class="mdi mdi-arrow-right-circle me-1"></i>
+              <span>{{ 'HEADER.NOTIFICATIONS.LOAD_MORE' | translate }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block" dropdown>
+        <button
+          type="button"
+          class="btn header-item"
+          dropdownToggle
+          id="page-header-user-dropdown1"
+        >
+          <img
+            class="rounded-circle header-profile-user"
+            ngSrc="assets/images/users/user-dummy-img.jpg" priority width="256" height="256"
+            alt="Header Avatar"
+          />
+          <span class="d-none d-xl-inline-block ms-1">{{ userContext.username }} </span>
+          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+          <!-- item-->
+          <a class="dropdown-item" routerLink="/profile"
+            ><i class="bx bx-user font-size-16 align-middle me-1"></i>
+            {{ 'HEADER.LOGIN.PROFILE' | translate }}</a
+          >
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item text-danger" (click)="logout()"
+            ><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+            {{ 'HEADER.LOGIN.LOGOUT' | translate }}</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

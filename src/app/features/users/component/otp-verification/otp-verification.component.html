@@ -1,0 +1,169 @@
+<div class="container-fluid p-0">
+  <div class="row g-0 h-100">
+    <div class="col-xl-9 h-100 d-none d-xl-block">
+      <div class="auth-full-bg">
+        <div class="w-100 h-100">
+          <video autoplay muted loop playsinline class="login-video-bg">
+            <source src="assets/videos/login-bg.mp4" type="video/mp4" />
+          </video>
+          <div class="bg-overlay"></div>
+          <div class="d-flex h-100 flex-column">
+            <div class="p-4">
+              <div class="row justify-content-center">
+                <div class="col-lg-7">
+                  <div class="text-center">
+                    <h4 class="mb-3 text-white">
+                      <i class="bx bxs-quote-alt-left text-white h1 align-middle me-3"></i>
+                      <span class="text-light">Multiflex</span> ERP
+                    </h4>
+
+                    <div dir="ltr">
+                      <app-edu-messages [scrollSpeed]="30"></app-edu-messages>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end col -->
+
+    <div class="col-xl-3 h-100">
+      <div class="auth-full-page-content h-100">
+        <div class="login-container w-100">
+          <!-- Logo section - 40% -->
+          <div class="logo-section d-md-flex">
+            <!-- Vidéo uniquement visible et chargée sur mobile -->
+            <div class="d-md-none">
+              <video autoplay muted loop playsinline class="login-logo-video">
+                <source src="assets/videos/login-bg-mobile.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="logo-overlay"></div>
+            <div class="logo-wrapper">
+              <a routerLink="/" class="d-block auth-logo">
+                <img
+                  ngSrc="assets/images/logo-web-light.png"
+                  alt=""
+                  priority
+                  height="162"
+                  width="283"
+                  class="auth-logo-dark"
+                />
+              </a>
+            </div>
+          </div>
+
+          <!-- Form section - 60% -->
+          <div class="form-section">
+            <div class="form-wrapper">
+              <div class="text-center">
+                <div class="otp-icon-wrapper">
+                  <ng-container>
+                    @switch (otpChannel()) {
+                      @case ('email') {
+                        <i class="bx bx-envelope otp-icon"></i>
+                      }
+                      @case ('sms') {
+                        <i class="bx bx-message-detail otp-icon"></i>
+                      }
+                      @case ('whatsapp') {
+                        <i class="bx bxl-whatsapp otp-icon"></i>
+                      }
+                      @default {
+                        <i class="bx bx-envelope otp-icon"></i>
+                      }
+                    }
+                  </ng-container>
+                </div>
+
+                <h5 class="text-primary mt-3">
+                  <ng-container>
+                    @switch (otpChannel()) {
+                      @case ('email') {
+                        <span>Vérifiez votre email</span>
+                      }
+                      @case ('sms') {
+                        <span>Vérifiez votre SMS</span>
+                      }
+                      @case ('whatsapp') {
+                        <span>Vérifiez votre WhatsApp</span>
+                      }
+                      @default {
+                        <span>Vérifiez votre code</span>
+                      }
+                    }
+                  </ng-container>
+                </h5>
+                <p class="text-muted">
+                  Veuillez saisir le code à 6 chiffres envoyé par
+                  <strong>{{ chanelDetails() }}</strong>
+                </p>
+              </div>
+
+              <div class="mt-4">
+                <form [formGroup]="form()" (ngSubmit)="verifyOtp()">
+                  <app-dynamic-form
+                    class="otp-fields-container"
+                    [fields]="fields()"
+                    [form]="form()"
+                  ></app-dynamic-form>
+
+                  <!-- Countdown and expiration info -->
+                  <div class="countdown-container mt-3 text-center">
+                    <p class="countdown-text" [class.text-danger]="isExpired()">
+                      Ce code expirera dans <strong>{{ formattedTime() }}</strong>
+                    </p>
+                  </div>
+
+                  <!-- Error message if any -->
+                  @if (errorMessage()) {
+                    <div class="alert alert-danger mt-3 text-center">
+                      {{ errorMessage() }}
+                    </div>
+                  }
+
+                  <!-- Verify button -->
+                  <div class="mt-4 d-grid">
+                    <button
+                      class="btn confirm-btn"
+                      type="submit"
+                      [disabled]="form().invalid || isExpired()"
+                    >
+                      <span>Confirmer</span>
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Resend code option -->
+                <div class="mt-4 text-center">
+                  <p class="resend-text">
+                    Vous n'avez pas reçu le code ?
+                    <button class="resend-link border-0 btn" [class.disabled]="!canResend()" (click)="resendOtp()">
+                      Renvoyer le code
+                    </button>
+                    @if (!canResend()) {
+                      <span> ({{ resendCountdown() }}s)</span>
+                    }
+                  </p>
+                </div>
+
+                <!-- Back to login or previous step -->
+                <div class="mt-2 text-center">
+                  <a routerLink="/canal-otp" class="text-primary">
+                    <i class="bx bx-arrow-back me-1"></i>
+                    Retour au choix du canal
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->
+</div>

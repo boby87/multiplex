@@ -1,0 +1,64 @@
+.dialog-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  font-family: Roboto, Arial, sans-serif;
+  color: #333;
+
+  section {
+    margin-bottom: 20px;
+
+    h3 {
+      border-bottom: 2px solid #1976d2;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+      color: #1976d2;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  .company-logo {
+    max-width: 150px;
+    margin-top: 10px;
+  }
+
+  .status {
+    font-weight: 600;
+    &.completed {
+      color: #2e7d32; // vert
+    }
+    &.pending {
+      color: #d32f2f; // rouge
+    }
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    border-radius: 12px;
+    margin-left: 6px;
+
+    &.primary {
+      background-color: #1976d2;
+      color: white;
+    }
+    &.whatsapp {
+      background-color: #25d366;
+      color: white;
+    }
+  }
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 12px 0;
+}

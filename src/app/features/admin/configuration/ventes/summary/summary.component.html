@@ -1,0 +1,25 @@
+<div class="card shadow-sm mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Résumé du modèle</h5>
+    <p class="card-text">
+      <strong>Nom :</strong> {{ service.template().templateName }}<br>
+      <strong>Description :</strong> {{ service.template().templateDescription }}<br>
+      <strong>Type :</strong> {{ service.template().templateType }}
+    </p>
+
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Opérations totales
+        <span class="badge bg-primary rounded-pill">{{ totalOperations() }}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Procédés totaux
+        <span class="badge bg-success rounded-pill">{{ totalProcedes() }}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Produits distincts
+        <span class="badge bg-info rounded-pill">{{ totalProduits() }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>Détails de la société</h2>
+
+<mat-dialog-content class="dialog-content">
+  <section class="company-info">
+    <h3>Informations générales</h3>
+    <p><strong>Nom :</strong> {{ company.name }}</p>
+    <p><strong>Code :</strong> {{ company.code }}</p>
+    <p><strong>Nom légal :</strong> {{ company.legalName }}</p>
+    <p>
+      <strong>Statut :</strong>
+      <span class="status" [ngClass]="company.status === 'COMPLETED' ? 'completed' : 'pending'">
+        {{ company.status }}
+      </span>
+    </p>
+    @if (company.logo) {
+      <p><img src="{{ company.logo }}" alt="Logo" class="company-logo" /></p>
+    }
+  </section>
+
+  <section class="legal-info">
+    <h3>Informations légales</h3>
+    <ul>
+      <li><strong>Numéro contribuable :</strong> {{ legals.taxPayerNumber }}</li>
+      <li><strong>Registre du commerce :</strong> {{ legals.tradeRegisterNumber }}</li>
+      <li><strong>Centre d’attachement fiscal :</strong> {{ legals.taxAttachmentCenter }}</li>
+      <li><strong>Capital social :</strong> {{ legals.shareCapital }}</li>
+      <li><strong>Régime fiscal :</strong> {{ legals.taxRegime }}</li>
+    </ul>
+  </section>
+
+  @if (address.length > 0) {
+    <section class="address-info">
+      <h3>Adresses</h3>
+      @for (addr of company.addresses; track addr.address) {
+        <div>
+          <h4>{{ addr.address.addressType }}</h4>
+          <p>{{ addr.address.street }} {{ addr.address.complement || '' }}</p>
+          <p>{{ addr.address.postalCode }} - {{ addr.address.city }}</p>
+          <p>{{ addr.address.region }}, {{ addr.address.country }}</p>
+          <p><strong>Email :</strong> {{ addr.email || 'Non renseigné' }}</p>
+          <p>
+            <strong>Site web :</strong>
+            @if (addr.website) {
+              <a href="{{ addr.website }}" target="_blank" rel="noopener noreferrer">{{
+                addr.website
+              }}</a>
+            } @else {
+              Non renseigné
+            }
+          </p>
+
+          @if (addr.contacts.length > 0) {
+            <h5>Contacts</h5>
+            <ul>
+              @for (contact of addr.contacts; track contact) {
+                <li>
+                  📞 {{ contact.phone }}
+                  @if (contact.defaultContact) {
+                    <span class="tag primary">Par défaut</span>
+                  }
+                  @if (contact.whatsapp) {
+                    <span class="tag whatsapp">WhatsApp</span>
+                  }
+                </li>
+              }
+            </ul>
+          }
+          <hr />
+        </div>
+      }
+    </section>
+  }
+
+  <section class="meta-info">
+    <h3>Métadonnées</h3>
+    <p><strong>Créé le :</strong> {{ company.createdAt | dateArrayToString: 'fr-FR' }}</p>
+    <p><strong>Modifié le :</strong> {{ company.updatedAt | dateArrayToString: 'fr-FR' }}</p>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Fermer</button>
+</mat-dialog-actions>

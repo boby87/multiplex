@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <div class="row d-flex justify-content-between">
+        <div class="col-sm-auto">
+          <app-search-box
+            [placeholder]="'Search projects...'"
+            (valueChange)="searchTerm.set($event)"
+          ></app-search-box>
+        </div>
+        <div class="col-sm-auto">
+          <app-add-button
+            [isRouter]="false"
+            (click)="openModal()"
+            [label]="labelButton()"
+          ></app-add-button>
+        </div>
+      </div>
+      <app-dynamic-table
+        [actions]="actions"
+        [columns]="columns()"
+        [filteredData]="filteredData()"
+      ></app-dynamic-table>
+    </div>
+  </div>
+</div>
+
+<ng-template #content role="document" let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel">
+      {{ priceEdit() ? 'Modifier la liste de prix' : 'Ajouter une liste de prix' }}
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-add-price [productVariant]="productVariant()" [priceToEdit]="priceEdit()"></app-add-price>
+  </div>
+</ng-template>

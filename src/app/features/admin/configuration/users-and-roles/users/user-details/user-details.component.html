@@ -1,0 +1,19 @@
+<app-page-title [title]="title()" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+@if (fields().length> 0) {
+  <div class="form-container">
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="form-content">
+      <div class="tab-pane">
+        <app-dynamic-form-arry [fields]="fields()" [form]="form()"></app-dynamic-form-arry>
+      </div>
+      <div class="form-actions border-top pt-3">
+        <button type="reset" (click)="cancelAction()" class="btn btn-outline">
+          {{ 'buttons.cancel' | translate }}
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="form().invalid">
+          {{ 'buttons.save' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+}

@@ -1,0 +1,73 @@
+<div class="d-flex align-items-center justify-content-between mb-2 border bg-white rounded p-2">
+  <div class="d-flex align-items-center flex-grow-1 me-3">
+    <i class="fa fa-grip-vertical text-muted me-2 cursor-move"></i>
+
+    <div class="form-check me-3">
+      <label class="form-check-label text-muted">
+        Optionnel
+        <input type="checkbox"
+               class="form-check-input"
+               [checked]="!operationSignal().mandatory"
+               (change)="toggleMandatory()" />
+      </label>
+    </div>
+
+    <input type="text"
+           class="form-control me-3"
+           [value]="operationSignal().name"
+           (change)="updateName($any($event.target).value)" />
+
+    <div class="d-flex align-items-center gap-2">
+      @if (operationSignal().isProcess) {
+        <span class="badge bg-primary p-2"><i class="fa fa-folder me-1"></i>Conteneur</span>
+      } @else {
+        <span class="badge bg-success p-2"><i class="fa fa-tasks me-1"></i>Tâche</span>
+      }
+
+      @if (pocede() > 0) {
+        <span class="badge bg-warning p-2 text-dark">
+          <i class="fa fa-cogs me-1"></i>
+          {{ pocede() }} procédé{{ pocede() > 1 ? 's' : '' }}
+        </span>
+      } @else if (!operationSignal().isProcess) {
+        <span class="badge bg-secondary p-2">
+          <i class="fa fa-exclamation-triangle me-1"></i>Non configurée
+        </span>
+      }
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center gap-2 ms-3">
+    @if (operationSignal().isProcess) {
+      <button type="button"
+              class="btn btn-outline-primary"
+              (click)="addChild()"
+              title="Ajouter une tâche enfant">
+        <i class="fa fa-plus"></i>
+      </button>
+    } @else {
+      <button type="button"
+              class="btn btn-outline-primary"
+              (click)="openProcedesModal()"
+              title="Configurer procédés">
+        <i class="fa fa-cogs"></i>
+      </button>
+    }
+    <button type="button"
+            class="btn btn-outline-secondary"
+            (click)="toggleType()"
+            title="Basculer conteneur/tâche">
+      <i class="fa fa-exchange-alt"></i>
+    </button>
+    <button class="btn btn-outline-danger ms-2"
+            (click)="remove()">
+      <i class="fa fa-trash"></i>
+    </button>
+  </div>
+</div>
+
+<div class="ms-4 mt-2">
+  @for (child of operationSignal().childOperations; track child.id) {
+    <app-tree [operation]="child" [parentOperation]="operationSignal()"></app-tree>
+  }
+</div>

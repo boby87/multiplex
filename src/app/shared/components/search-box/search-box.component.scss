@@ -1,0 +1,13 @@
+.search-icon {
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  font-size: 1.2rem;
+  color: #aaa;
+  pointer-events: none;
+}
+select[multiple] {
+  height: auto;
+  min-height: 100px;
+}

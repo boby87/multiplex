@@ -1,0 +1,93 @@
+@keyframes scrollUpAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%); // On défile jusqu'à la moitié puisque les messages sont dupliqués
+  }
+}
+
+.edu-messages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  padding: 0 1rem;
+  position: relative;
+  background-color: #263c89; // Fond bleu
+  border-radius: 8px; // Arrondir légèrement les bords pour un look moderne
+}
+
+.messages-mask {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 1rem;
+
+  // Dégradés pour masquer partiellement les messages du haut et du bas
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(38, 60, 137, 1) 0%, rgba(38, 60, 137, 0) 100%);
+  }
+
+  &::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(38, 60, 137, 1) 0%, rgba(38, 60, 137, 0) 100%);
+  }
+}
+
+.messages-scroll {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  animation: scrollUpAnimation linear infinite;
+  animation-duration: var(--scroll-duration, 20s);
+  will-change: transform;
+}
+
+:host {
+  --scroll-duration: 20s;
+
+  &:not(:hover) .messages-scroll {
+    animation-play-state: running;
+  }
+
+  &:hover .messages-scroll {
+    animation-play-state: paused; // Pause au survol pour permettre la lecture
+  }
+}
+
+.edu-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.message-content {
+  max-width: 90%;
+}
+
+.message-text {
+  color: #ffffff; // Texte blanc pour meilleur contraste sur fond bleu
+  line-height: 1.6;
+  margin: 0;
+}

@@ -1,0 +1,680 @@
+{
+  "HEADER": {
+    "SEARCH": "Search...",
+    "NOTIFICATIONS": {
+      "TITLE": "Notifications",
+      "VIEW_ALL": "View All",
+      "THIRD": {
+        "TIME": "Some time ago"
+      },
+      "LOAD_MORE": "Load More"
+    },
+    "LOGIN": {
+      "PROFILE": "Profile",
+      "LOGOUT": "Logout"
+    }
+  },
+  "menu::dashboard": "Dashboard",
+  "menu::config": "Configuration",
+  "menu::uaa": "Users & Roles",
+  "menu::uaa::acls": "Access Controls (ACLs)",
+  "menu::uaa::roles": "Roles",
+  "menu::uaa::users": "Users",
+  "menu::organization": "Organization",
+  "menu::organization::companies": "Companies",
+  "menu::organization::departments": "Departments",
+  "menu::organization::jobs": "Jobs",
+  "menu::catalog": "Catalog",
+  "menu::catalog::productCategories": "Product Categories",
+  "menu::catalog::uoms": "Units of Measure",
+  "menu::catalog::baseProducts": "Base Products",
+  "menu::catalog::productVariants": "Product Variants",
+  "menu::prices": "Prices",
+  "menu::prices::pricesList": "Price Lists",
+  "menu::rh": "Human Resources",
+  "menu::rh::employee": "Employees",
+  "menu::rh::technicians": "Technicians",
+  "menu::crm": "CRM",
+  "menu::crm::physical_technician": "Physical Technicians",
+  "menu::crm::business_technician": "Business Technicians",
+
+  "PROFILE": {
+    "WELCOME": "Welcome Back!",
+    "DESCRIPTION": "It will seem like simplified",
+    "CURRENT_COMPANY": "Current company",
+    "SWITCH_COMPANY": "Switch company",
+    "DEFAULT_COMPANY": "Default company",
+    "INFOS_COMPANY": "Company information"
+  },
+
+  "baseArticles": {
+    "title": "Base Articles Management",
+    "titleNew": "New Base Article",
+    "addButton": "Add Base Article",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "catalogue": "Catalog",
+      "baseArticles": "Base Articles",
+      "new": "New"
+    }
+  },
+  "categories": {
+    "title": "Category Management",
+    "titleNew": "New Category",
+    "addButton": "Add Category",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "catalogue": "Catalog",
+      "categories": "Categories",
+      "new": "New"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "productUom": {
+    "title": "Unit of Measure Management",
+    "titleNew": "New Unit of Measure",
+    "addButton": "Add Unit of Measure",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "catalogue": "Catalog",
+      "unity_of_measure": "Unit of Measure",
+      "new": "New"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "companie": {
+    "titleNew": "New Company",
+    "titleList": "Companies",
+    "addButton": "Add Company",
+    "tabs": {
+      "generalInfo": "General Information",
+      "addressContact": "Address & Contact",
+      "fiscalInfo": "Legal & Fiscal Information",
+      "configuration": "Configuration"
+    },
+    "breadcrumb": {
+      "projects": "Projects",
+      "configuration": "Configuration",
+      "structure": "Company Structure",
+      "companies": "Companies",
+      "new": "New Company"
+    },
+    "actions": {
+      "edit": "Edit",
+      "details": "Details",
+      "delete": "Delete"
+    }
+  },
+  "prices": {
+    "title": "Price Management",
+    "titleNew": "New Price",
+    "addButton": "Add Price",
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "tarification": "Pricing",
+      "prices": "Prices",
+      "new": "New"
+    }
+  },
+  "department": {
+    "titleNew": "New Department",
+    "titleList": "Departments",
+    "addButton": "Add Department",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "structure": "Company Structure",
+      "departments": "Department",
+      "new": "New"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "job": {
+    "titleNew": "New Job",
+    "titleList": "Jobs",
+    "addButton": "Add Job",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "structure": "Company Structure",
+      "jobs": "Job",
+      "new": "New"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "employee": {
+    "titleNew": "New Employee",
+    "title": "Employees",
+    "addButton": "Add Employee",
+    "tabs": {
+      "generalInfo": "Business",
+      "organizationDetails": "Position & Organization",
+      "contactAndPay": "Contact & Payroll",
+      "userInfo": "User Information"
+    },
+    "breadcrumb": {
+      "humanResources": "Human Resources",
+      "employees": "Employees",
+      "new": "New Employee"
+    },
+    "actions": {
+      "edit": "Edit",
+      "details": "Details",
+      "delete": "Delete"
+    }
+  },
+  "technician": {
+    "business": {
+      "title": "Techniciens Business",
+      "addButton": "Add",
+      "actions": {
+        "edit": "Éditer",
+        "details": "Détails",
+        "delete": "Supprimer"
+      }
+    },
+    "physical": {
+      "title": "Physical Technicians",
+      "addButton": "Add",
+      "actions": {
+        "edit": "Edit",
+        "details": "Details",
+        "delete": "Delete"
+      }
+    },
+    "titleCreatePhysical": "Create Physical Technician",
+    "titleCreateBusiness": "Create Business Technician",
+    "tabs": {
+      "generalInfo": "General Information",
+      "userInfo": "User Information",
+      "uploadDocuments": "Upload Documents",
+      "userAddress": "Addresses"
+    },
+    "breadcrumb": {
+      "physicalList": "Physical Technicians",
+      "businessList": "Business Technicians",
+      "createPhysical": "Create Technician",
+      "createBusiness": "Create Business Technician"
+    }
+  },
+  "user": {
+    "titleList": "Users",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "user-roles": "User Roles",
+      "users": "Users"
+    },
+    "buttons": {
+      "updateContact": "Update Contact",
+      "updateAddress": "Update Address"
+    }
+  },
+  "profile": {
+    "breadcrumb": {
+      "profile": "Profile"
+    },
+    "updateContact": "Update Contact",
+    "updateAddress": "Update Address"
+  },
+  "acl": {
+    "title": "Model Access Control (ACL)",
+    "addButton": "Add ACL",
+    "updateTitle": "Update ACL",
+    "update": "Edit",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "user-roles": "Users & Roles",
+      "acls": "ACLs"
+    },
+    "actions": {
+      "edit": "Edit",
+      "details": "Details"
+    }
+  },
+  "user-role": {
+    "updateTitle": "Update Role",
+    "new": "New Role",
+    "title": "User Roles",
+    "addButton": "Add Role",
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "user-roles": "Users & Roles",
+      "roles": "Roles"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "COMPANIE": {
+    "GENERAL_INFO": {
+      "NAME": {
+        "LABEL": "Company Name",
+        "PLACEHOLDER": "Ex: BES Ltd"
+      },
+      "LEGAL_NAME": {
+        "LABEL": "Legal Name",
+        "PLACEHOLDER": "Ex: BES Ltd"
+      },
+      "CODE": {
+        "LABEL": "Code",
+        "PLACEHOLDER": "Ex: BES"
+      },
+      "PARENT": {
+        "LABEL": "Parent Company",
+        "PLACEHOLDER": "Ex: BES"
+      },
+      "CURRENCY": {
+        "LABEL": "Main Currency"
+      }
+    },
+    "ADDRESS_CONTACT": {
+      "ADD_ADDRESS": "Add another address",
+      "ADDRESS": {
+        "LABEL": "Address"
+      },
+      "ADDRESS_TYPE": {
+        "LABEL": "Address Type",
+        "OPTIONS": {
+          "HOME": "Home",
+          "WORK": "Work",
+          "BILLING": "Billing",
+          "OTHERS": "Others"
+        }
+      },
+      "STREET": {
+        "LABEL": "Street",
+        "PLACEHOLDER": "123 Tech Avenue"
+      },
+      "COMPLEMENT": {
+        "LABEL": "Address Complement",
+        "PLACEHOLDER": "Suite 500"
+      },
+      "POSTAL_CODE": {
+        "LABEL": "Postal Code",
+        "PLACEHOLDER": "94105"
+      },
+      "QUARTER": {
+        "LABEL": "Quarter",
+        "PLACEHOLDER": "Bonamoussadi"
+      },
+      "CITY": {
+        "LABEL": "City",
+        "PLACEHOLDER": "Douala"
+      },
+      "REGION": {
+        "LABEL": "Region",
+        "PLACEHOLDER": "Littoral"
+      },
+      "COUNTRY": {
+        "LABEL": "Country",
+        "VALUE": "Cameroon"
+      },
+      "COUNTRY_CODE": {
+        "LABEL": "Country Code",
+        "VALUE": "CM"
+      },
+      "DEFAULT_ADDRESS": {
+        "LABEL": "Default Address"
+      },
+      "EMAIL": {
+        "LABEL": "Email",
+        "PLACEHOLDER": "info@techsolutions.example.com"
+      },
+      "WEBSITE": {
+        "LABEL": "Website",
+        "PLACEHOLDER": "https://techsolutions.example.com"
+      },
+      "CONTACTS": {
+        "ADD_CONTACT": "Add another contact",
+        "PHONE": {
+          "LABEL": "Phone"
+        },
+        "DEFAULT_CONTACT": {
+          "LABEL": "Default Contact"
+        },
+        "WHATSAPP": {
+          "LABEL": "WhatsApp"
+        }
+      }
+    },
+    "FISCAL_INFO": {
+      "NIF": {
+        "LABEL": "Taxpayer Number (NIF)",
+        "PLACEHOLDER": "Ex: M0123456789B"
+      },
+      "RCCM": {
+        "LABEL": "Trade Register Number (RCCM)",
+        "PLACEHOLDER": "Ex: RC/YDE/2018/A/001"
+      },
+      "CAPITAL": {
+        "LABEL": "Share Capital (XAF)",
+        "PLACEHOLDER": "Ex: 1000000"
+      },
+      "CENTER": {
+        "LABEL": "Tax Attachment Center",
+        "PLACEHOLDER": "Ex: CDI Yaoundé II"
+      },
+      "REGIME": {
+        "LABEL": "Tax Regime",
+        "PLACEHOLDER": "Ex: Standard Corporate"
+      }
+    },
+    "CONFIGURATION": {
+      "LOGO": {
+        "LABEL": "Company Logo"
+      }
+    }
+  },
+  "POSTE": {
+    "NAME": {
+      "LABEL": "Job Title"
+    },
+    "COMPANY": {
+      "LABEL": "Company"
+    },
+    "DEPARTMENT": {
+      "LABEL": "Department"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description (Optional)"
+    }
+  },
+  "DEPARTEMENT": {
+    "NAME": {
+      "LABEL": "Department Name"
+    },
+    "PARENT": {
+      "LABEL": "Parent Department (Optional)"
+    },
+    "COMPANY": {
+      "LABEL": "Company"
+    }
+  },
+  "ROLE": {
+    "NAME": {
+      "LABEL": "Role Name"
+    },
+    "COMPANIES": {
+      "LABEL": "Companies"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description"
+    }
+  },
+  "BASE_ARTICLES": {
+    "CODE": "Code",
+    "DESIGNATION": "Designation",
+    "SUPER_CATEGORY": "Super Category",
+    "PRODUCT_CATEGORY_CODE": "Product Category Code",
+    "PRODUCT_CATEGORY_PLACEHOLDER": "Ex: 6874774e0f911228d90976e2",
+    "PRODUCT_TYPE": "Product Type",
+    "PRODUCT_TYPE_MULTIFLEX": "MULTIFLEX",
+    "PRODUCT_TYPE_OTHER": "OTHER"
+  },
+  "SKILLS": {
+    "SKILL_NAME": "Skill Name",
+    "STATUS": "Status",
+    "STATUS_ACTIVE": "ACTIVE",
+    "STATUS_PENDING": "PENDING",
+    "MAIN_SKILL": "Main Skill",
+
+  "BREADCRUMB": {
+    "GENERAL_SETTINGS": "General Settings",
+    "VALUE_LISTS": "Value Lists",
+    "TECHNICAL_SKILLS": "Technical Skills",
+    "NEW": "New"
+  },
+    "title": "Technical Skills",
+    "newTitle": "New Skill",
+    "addButton": "Add Skill"
+
+},
+  "PARTNER": {
+    "NOTES": "Notes",
+    "NOTES_PLACEHOLDER": "Senior account manager",
+    "CONTACT_PERSON": "Contact Person",
+    "CONTACT_PERSON_PLACEHOLDER": "Michael Smith",
+    "LANGUAGE": "Language",
+    "LANG_EN": "English",
+    "LANG_FR": "French",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "michael.smith@iola.example.com",
+    "INFO": "Partner Information",
+    "FIRSTNAME": "First Name",
+    "FIRSTNAME_PLACEHOLDER": "Michael",
+    "LASTNAME": "Last Name",
+    "LASTNAME_PLACEHOLDER": "Smith",
+    "PHONE": "Phone",
+    "PHONE_PLACEHOLDER": "691233456",
+    "ADDRESS": "Address",
+    "ADDRESS_PLACEHOLDER": "123 Corporate Drive, San Francisco, CA"
+  },
+  "EMPLOYEE": {
+    "SALARY": "Official Base Salary",
+    "SALARY_PLACEHOLDER": "Ex: 90000",
+    "ADDITIONAL_INFO": "Additional Information",
+    "ADDITIONAL_INFO_PLACEHOLDER": "Ex: Bonus, allowances, etc."
+  },
+  "USER": {
+    "USERNAME": "Username",
+    "USERNAME_PLACEHOLDER": "Ex: msmith",
+    "COMPANIES": "Company Assignments",
+    "COMPANY": "Company",
+    "DEPARTMENT": "Department",
+    "JOB": "Job",
+    "MANAGER": "Manager",
+    "ROLES": "Associated Roles",
+    "DEFAULT_COMPANY": "Default Company"
+  },
+  "TECHNICIAN": {
+    "DISPLAY_NAME": "Display Name",
+    "DISPLAY_NAME_PLACEHOLDER": "John Doe",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "john.doe@example.com",
+    "LANGUAGE": "Language",
+    "LANG_EN": "English",
+    "LANG_FR": "French",
+    "CONTACT_NAME": "Contact person",
+    "CONTACT_NAME_PLACEHOLDER": "John Doe",
+    "NOTES": "Notes",
+    "NOTES_PLACEHOLDER": "Senior field technician",
+    "DETAILS": "Technician Characteristics",
+    "TYPE": "Technician Type",
+    "CATEGORY": "Category",
+    "FIRSTNAME": "First Name",
+    "LASTNAME": "Last Name",
+    "LASTNAME_PLACEHOLDER": "Doe",
+    "CONTACTS": "Contacts",
+    "PHONE": "Phone",
+    "PHONE_PLACEHOLDER": "698765432",
+    "DEFAULT_CONTACT": "Default",
+    "WHATSAPP": "Whatsapp",
+    "SKILLS": "Skills",
+    "DOMAIN": "Field(s) of Activity(ies)",
+    "STATUS": "Status",
+    "MAIN": "Main"
+  },
+  "BUSINESS_TECHNICIAN": {
+    "NAME": "Partner Name",
+    "EMAIL": "Email",
+    "NOTES": "Notes",
+    "CONTACT_PERSON": "Contact person",
+    "LANGUAGE": "Language",
+    "LANG_FR": "French",
+    "LANG_EN": "English",
+    "DETAILS": "Technician Characteristics",
+    "TYPE": "Technician Type",
+    "CATEGORY": "Category",
+    "GRADE": "Grade",
+    "ACRONYM": "Acronym",
+    "SLOGAN": "Slogan",
+    "LEGAL_STATUS": "Legal Status",
+    "REGISTER_NUMBER": "Commercial Register Number",
+    "TAX_NUMBER": "Taxpayer Number",
+    "TAX_REGIME": "Tax Regime",
+    "TAXES": "Applicable Taxes and Duties",
+    "WEBSITE": "Website",
+    "CONTACTS": "Contacts",
+    "CONTACTS_HEAD": "Add contacts",
+    "PHONE": "Phone",
+    "DEFAULT_CONTACT": "Default Contact",
+    "WHATSAPP": "WhatsApp",
+    "SKILLS": "Skills",
+    "SKILLS_HEAD": "Add skills",
+    "SKILL_NAME": "Skill Name",
+    "STATUS": "Status",
+    "MAIN_SKILL": "Main Skill"
+  },
+
+  "PRODUCT_VARIANT": {
+    "titleNew": "New Product Variant",
+    "tabs": {
+      "generalInfo": "General Information",
+      "packaging": "Packaging",
+      "medias": "Media"
+    },
+    "breadcrumb": {
+      "configuration": "Configuration",
+      "catalogue": "Catalogue",
+      "variants": "Variants",
+      "new": "New"
+    },
+    "title": "Article Variants Management",
+    "addButton": "Add",
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "BASE_PRODUCT": {
+      "LABEL": "Base Product"
+    },
+    "CODE": {
+      "LABEL": "Code"
+    },
+    "DESIGNATION": {
+      "LABEL": "Designation"
+    },
+    "UOM": {
+      "LABEL": "Unit of Measure"
+    },
+    "CONDITIONING": {
+      "LABEL": "Conditioning"
+    },
+    "DETAILED_DESCRIPTION": {
+      "LABEL": "Detailed Description"
+    },
+    "PRODUCT_SPECS": {
+      "LABEL": "Technical Specifications"
+    },
+    "TYPE": {
+      "LABEL": "Product Type"
+    },
+    "YIELD_SURFACE": {
+      "LABEL": "Surface Yield"
+    },
+    "YIELD_SURFACE_UOM": {
+      "LABEL": "Yield Unit"
+    },
+    "DURATION_BEFORE": {
+      "LABEL": "Duration (Before)"
+    },
+    "DURATION_UOM": {
+      "LABEL": "Duration Unit"
+    },
+    "DURATION_AFTER": {
+      "LABEL": "Duration (After)"
+    },
+    "LAYERS_COUNT": {
+      "LABEL": "Number of Layers"
+    },
+    "DEFAULT_SECURITY_QUANTITY": {
+      "LABEL": "Default Security Quantity"
+    },
+    "PRODUCT_ADVICE": {
+      "LABEL": "Product Advice"
+    }
+  },
+"urlImage": "#",
+  "name": "Name",
+  "description": "Description",
+  "leaf": "Leaf",
+  "superCategory": "Super Category",
+  "productType": "Product Type",
+  "code": "Code",
+  "designation": "Designation",
+  "detailedDescription": "Detailed Description",
+  "status": "Status",
+  "priceListName": "Price List",
+  "currency": "Currency",
+  "priceListType": "List Type",
+  "legalName": "Legal Name",
+  "companyName": "Company",
+  "parentName": "Parent Department",
+  "departmentName": "Department",
+  "lastname": "Last Name",
+  "firstname": "First Name",
+  "email": "Email",
+  "phone": "Phone",
+  "address": "Address",
+  "technicianType": "Type",
+  "technicianCategory": "Category",
+  "technicianGrade": "Grade",
+  "legalStatus": "Legal Status",
+  "taxRegime": "Tax Regime",
+  "jobName": "Job",
+  "roles": "Roles",
+  "defaultCompany": "Default Company",
+  "oldPassword": "Old Password",
+  "newPassword": "New Password",
+  "addresses": "Addresses",
+  "addressType": "Address Type",
+  "street": "Street",
+  "complement": "Complement",
+  "postalCode": "Postal Code",
+  "quarter": "Quarter",
+  "city": "City",
+  "region": "Region",
+  "country": "Country",
+  "countryCode": "Country Code",
+  "latitude": "Latitude",
+  "longitude": "Longitude",
+  "defaultAddress": "Default Address",
+  "contacts": "Contacts",
+  "defaultContact": "Primary Contact",
+  "whatsapp": "WhatsApp",
+  "personalInfos": "Personal Info",
+  "currentCompany": "Current Company",
+  "changePassword": "Change Password",
+  "changeEmail": "Change Email",
+  "allowedCompanies": "Allowed Companies",
+  "employeeContract": "Employee Contract",
+  "officialBaseSalary": "Official Base Salary",
+  "partnerType": "Partner Type",
+  "fullName": "Full Name",
+  "username": "Username",
+  "model": "Model",
+  "role": "Role",
+  "main": "Main Skill",
+  "permission": "Permissions",
+  "buttons": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "next": "Next",
+    "previous": "previous"
+  }
+}

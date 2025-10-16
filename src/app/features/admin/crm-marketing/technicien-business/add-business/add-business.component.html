@@ -1,0 +1,28 @@
+<app-page-title [title]="title()" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+<div class="form-container">
+  <app-tabs [activeTab]="activeTab" [tabs]="tabs"></app-tabs>
+
+  @for (tab of tabs; track tab.id) {
+    <ng-container>
+      @if (activeTab === tab.id) {
+        <form [formGroup]="tab.form()" (ngSubmit)="onSubmit()" class="form-content">
+          <div class="tab-pane">
+            <app-dynamic-form-arry
+              [fields]="tab.fields()"
+              [form]="tab.form()"
+            ></app-dynamic-form-arry>
+          </div>
+          <div class="form-actions border-top pt-3">
+            <button type="reset" (click)="previousAction()" class="btn btn-outline">
+              {{ (tab.label === 'technician.tabs.generalInfo'? 'buttons.cancel': 'buttons.previous') | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="tab.form().invalid">
+              {{ (tab.label === 'technician.tabs.user-infos'? 'buttons.save': 'buttons.next') | translate }}
+            </button>
+          </div>
+        </form>
+      }
+    </ng-container>
+  }
+</div>

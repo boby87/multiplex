@@ -1,0 +1,13 @@
+<div class="form-container">
+  <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="form-content">
+    <div class="tab-pane">
+      <app-dynamic-form-group [fields]="fields()" [form]="form()"></app-dynamic-form-group>
+    </div>
+    <div class="form-actions border-top pt-3">
+      <button type="button" (click)="cancelAction()" class="btn btn-outline">
+        {{ 'buttons.cancel' | translate }}
+      </button>
+      <button type="submit" class="btn btn-primary">{{ 'buttons.save' | translate }}</button>
+    </div>
+  </form>
+</div>

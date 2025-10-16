@@ -1,0 +1,225 @@
+.login-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; // S'assurer que la vidéo est derrière l'overlay
+}
+
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); // Assombrir légèrement la vidéo pour améliorer la lisibilité
+  z-index: 1;
+}
+
+// Assurer que le contenu se trouve au-dessus de la vidéo et de l'overlay
+.d-flex.h-100.flex-column {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center; // Centre verticalement dans le conteneur flex
+  height: 100%;
+}
+
+// Ajuster la hauteur pour que le contenu occupe toute la hauteur disponible
+.auth-full-bg {
+  height: 100vh;
+}
+
+// Pour s'assurer que la partie droite (formulaire) est également à 100% de hauteur
+.col-xl-3 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Nouvelle structure de layout
+.login-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// Section logo - 40% de la hauteur
+.logo-section {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #263c89;
+  position: relative;
+  overflow: hidden;
+}
+
+// Vidéo d'arrière-plan de la section logo
+.login-logo-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+// Overlay pour la vidéo de la section logo
+.logo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 60, 137, 0.6); // Teinte bleue semi-transparente par défaut
+  z-index: 1;
+}
+
+// Sur les écrans larges, on masque complètement la vidéo
+@media (min-width: 768px) {
+  .logo-overlay {
+    background-color: #263c89; // Bleu opaque sur les écrans larges
+    opacity: 1;
+  }
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+// Section formulaire - 60% de la hauteur
+.form-section {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eaedf1;
+}
+
+// Ajustements pour mobile
+@media (max-width: 1199.98px) {
+  .form-section {
+    height: 100vh; // Sur mobile, le formulaire prend toute la hauteur
+    border-top: none;
+  }
+
+  // Sur mobile, la colonne du formulaire prend toute la largeur
+  .col-xl-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .login-container {
+    min-height: 100vh; // Assure que le conteneur prend au moins toute la hauteur de la fenêtre
+  }
+}
+
+@media (max-width: 767.98px) {
+  .logo-section {
+    height: 45vh; // 45% de la hauteur sur mobile
+  }
+
+  .form-section {
+    height: 55vh; // 55% de la hauteur sur mobile
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-top: -20px; // Créer un léger chevauchement pour un effet de carte
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1); // Ombre légère pour renforcer l'effet de carte
+  }
+
+  .login-container {
+    height: 100vh; // Force la hauteur à 100% sur les très petits écrans
+  }
+
+  .auth-full-page-content {
+    height: 100vh !important;
+  }
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 1.5rem;
+}
+
+// Styles pour le formulaire personnalisé
+.custom-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-input {
+  padding-left: 40px;
+  border-radius: 30px;
+  height: 48px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: #6db74c;
+    box-shadow: 0 0 0 0.2rem rgba(109, 183, 76, 0.25);
+  }
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  color: #6c757d;
+  font-size: 18px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  color: #6c757d;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.login-btn {
+  background-color: #263c89;
+  color: white;
+  border-radius: 30px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+
+  &:hover,
+  &:focus {
+    background-color: darken(#263c89, 10%);
+  }
+
+  &:disabled {
+    background-color: lighten(#263c89, 20%);
+    cursor: not-allowed;
+  }
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+}

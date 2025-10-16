@@ -1,0 +1,35 @@
+<div class="search-box">
+  <div class="row g-2 align-items-end"> <!-- align-items-end pour aligner bas des champs -->
+    <!-- Zone de recherche texte -->
+    <div class="col">
+      <div class="position-relative">
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="placeholder()"
+          (input)="onInput($event)"
+        />
+        <i
+          class="bx bx-search-alt search-icon position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"
+        ></i>
+      </div>
+    </div>
+
+    <!-- Filtres -->
+    @for (filter of selectedFilters(); track filter.key) {
+      <div class="col-auto d-flex flex-column">
+        <label [for]="filter.key" >{{ filter.label }}</label>
+        <select
+          [id]="filter.key"
+          class="form-select"
+          (change)="onFilterChange(filter.key, $event)"
+        >
+          <option ></option>
+          @for (option of filter.options; track option) {
+            <option [value]="option">{{ option }}</option>
+          }
+        </select>
+      </div>
+    }
+  </div>
+</div>

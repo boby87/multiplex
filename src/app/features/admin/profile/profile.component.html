@@ -1,0 +1,247 @@
+<div class="container-fluid">
+  <app-page-title title="Profile" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card overflow-hidden">
+        <div class="bg-primary-subtle">
+          <div class="row">
+            <div class="col-7">
+              <div class="text-primary p-3">
+                <h5 class="text-primary">{{ 'PROFILE.WELCOME' | translate }}</h5>
+                <p>{{ 'PROFILE.DESCRIPTION' | translate }}</p>
+              </div>
+            </div>
+            <div class="col-5 align-self-end">
+              <img src="assets/images/profile-img.png" alt="" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="avatar-md profile-user-wid mb-4">
+                <img
+                  [ngSrc]="profile().logo || 'assets/images/users/user-dummy-img.jpg'" priority width="50" height="50"
+                  alt=""
+                  class="img-thumbnail rounded-circle"
+                />
+              </div>
+              <h5 class="font-size-15 text-truncate">{{ profile().username }}</h5>
+              <p class="text-muted mb-2 text-truncate">ID: {{ profile().partnerId }}</p>
+            </div>
+
+            <div class="col-md-12 justify-content-center">
+              <button class="btn btn-outline-primary btn-sm mb-2 mx-1" (click)="changePassword()">
+                <i class="mdi mdi-key"></i>{{ 'changePassword' | translate }}
+              </button>
+              <button class="btn btn-outline-secondary btn-sm mb-2" (click)="changeEmail()">
+                <i class="mdi mdi-eye-outline"></i>{{ 'changeEmail' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">{{ 'personalInfos' | translate }}</h4>
+          <div class="table-responsive">
+            <table class="table table-nowrap mb-0">
+              <tbody>
+              <tr>
+                <th scope="row">{{ 'firstname' | translate }} :</th>
+                <td>{{ profile()?.name }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'phone' | translate }} :</th>
+                <td>{{ profile()?.phone }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'email' | translate }} :</th>
+                <td>{{ profile()?.email }}</td>
+              </tr>
+                @if (profile()?.partnerType){
+                  <tr>
+                    <th scope="row">{{ 'partnerType' | translate }} :</th>
+                    <td>{{ profile()?.partnerType }}</td>
+                  </tr>
+                }
+                @if (profile()?.status){
+                  <tr>
+                    <th scope="row">{{ 'status' | translate }} :</th>
+                    <td>
+                  <span class="status"
+                        [ngClass]="{ active: profile().status === 'ACTIVE',inactive: profile().status === 'INACTIVE'}">
+                    {{ profile()?.status }}</span>
+                    </td>
+                  </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+
+      <!-- end card -->
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">{{ 'PROFILE.INFOS_COMPANY' | translate }}</h4>
+          <div class="col-md-12 justify-content-center">
+
+
+            <select class="btn btn-outline-primary w-100 btn-sm mb-2" >
+              <option>
+                {{ 'PROFILE.SWITCH_COMPANY' | translate }}
+              </option>
+              @for (company of profile().companies; track company.company.id) {
+                <option
+                  [value]="company.company.code"
+                  [selected]="company.company.code === profile().currentCompanyId"
+                  (click)="switchCompany(company.company.code)"
+                >
+                  {{ company.company.name }}
+                </option>
+              }
+            </select>
+
+          </div>
+          <div class="table-responsive">
+            <table class="table table-nowrap mb-0">
+              <tbody>
+
+                @if (profile()?.currentCompanyId){
+                  <tr>
+                    <th scope="row">{{ 'PROFILE.CURRENT_COMPANY' | translate }} :</th>
+                    <td>{{ profile()?.currentCompanyId }}</td>
+                  </tr>
+                }
+                @if (profile()?.defaultCompanyId){
+                  <tr>
+                    <th scope="row">{{ 'PROFILE.DEFAULT_COMPANY' | translate }} :</th>
+                    <td>{{ profile()?.defaultCompanyId }}</td>
+                  </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+
+      <div class="card">
+        @if (profile()?.employeeContract?.additionalInformation && profile()?.employeeContract?.officialBaseSalary){
+          <div class="card-body">
+            <h4 class="card-title mb-4">{{ 'employeeContract' | translate }}</h4>
+            <p class="text-muted mb-4">
+              {{ profile()?.employeeContract?.additionalInformation }}
+            </p>
+            <div class="table-responsive">
+              <table class="table table-nowrap mb-0">
+                <tbody>
+                <tr>
+                  <th scope="row">{{ 'officialBaseSalary' | translate }} :</th>
+                  <td>{{ profile()?.employeeContract?.officialBaseSalary | currency: 'XAF' }}</td>
+                </tr>
+                  @for (media of profile().employeeContract?.contracts; track media.mediaId) {
+                    <tr>
+                      <th scope="row">{{ media.mediaTypeCode | translate }} :</th>
+                      <td><a [href]="media.url" target="_blank" rel="noopener noreferrer">
+                        <i class="fa fa-file-pdf"></i>
+
+                      </a></td>
+                    </tr>
+                  }
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+
+      </div>
+      <!-- end card -->
+
+      <!-- end card -->
+      <div class="card">
+        @if (filteredDataSkills().length > 0) {
+          <div class="card-body">
+            <h4 class="card-title mb-4">{{ 'skills' | translate }}</h4>
+            <app-dynamic-table
+              [actions]="actions"
+              [columns]="columnsSkill()"
+              [filteredData]="filteredDataSkills()"
+            ></app-dynamic-table>
+          </div>
+        }
+      </div>
+      <!-- end card -->
+    </div>
+
+    <div class="col-xl-8">
+      @if (filteredDataAddress().length > 0) {
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">{{ 'addresses' | translate }}</h4>
+            <div class="row d-flex justify-content-end">
+              <div class="col-sm-auto">
+                <app-add-button
+                  [isRouter]="false"
+                  (click)="changeAddress()"
+                  [label]="labelButtonAddress()"
+                ></app-add-button>
+              </div>
+            </div>
+            <app-dynamic-table
+              [actions]="actions"
+              [columns]="columnsAddress()"
+              [filteredData]="filteredDataAddress()"
+            ></app-dynamic-table>
+          </div>
+        </div>
+      }
+      @if (filteredDataContact().length > 0) {
+        <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">{{ 'contacts' | translate }}</h4>
+          <div class="row d-flex justify-content-end">
+            <div class="col-sm-auto">
+              <app-add-button
+                [isRouter]="false"
+                (click)="changeContact()"
+                [label]="labelButtonContact()"
+              ></app-add-button>
+            </div>
+          </div>
+          <app-dynamic-table
+            [actions]="actions"
+            [columns]="columnsContact()"
+            [filteredData]="filteredDataContact()"
+          ></app-dynamic-table>
+        </div>
+      </div>
+      }
+
+      @if (filteredData().length > 0) {
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">{{ 'allowedCompanies' | translate }}</h4>
+            <app-dynamic-table
+              [actions]="actions"
+              [columns]="columnsCompany()"
+              [filteredData]="filteredData()"
+            ></app-dynamic-table>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+  <!-- end row -->
+</div>

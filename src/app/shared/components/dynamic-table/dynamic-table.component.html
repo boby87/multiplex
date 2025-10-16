@@ -1,0 +1,124 @@
+<!-- Table -->
+<div class="table-responsive">
+  <table class="table align-middle dt-responsive nowrap w-100 table-check" id="customerList-table">
+
+    <!-- Header -->
+    @if (columns().length > 0) {
+      <thead>
+      <tr>
+        @if (withCheckBox()) {
+          <th>
+            <input type="checkbox" [checked]="areAllSelected()" (change)="toggleAll()"/>
+          </th>
+        }
+
+        @for (col of columns(); track col) {
+          <th (click)="sortBy(col)" style="cursor: pointer">
+            {{ col | translate }}
+            @if (sortColumn === col) {
+              <span>
+                  <i [class]="sortDirection === 'asc' ? 'mdi mdi-arrow-up' : 'mdi mdi-arrow-down'"></i>
+                </span>
+            }
+          </th>
+        }
+
+        @if (actions().length > 0) {
+          <th>Actions</th>
+        }
+      </tr>
+      </thead>
+    }
+
+    <!-- Body -->
+    <tbody>
+      @if (filteredData().length > 0) {
+        @for (item of paginatedData(); track item) {
+          <tr>
+            @if (withCheckBox()) {
+              <td>
+                <input type="checkbox" [(ngModel)]="item.selected"/>
+              </td>
+            }
+
+            @for (col of columns(); track col) {
+              <td class="px-4 py-3">
+                @switch (true) {
+                  @case (isImage(item[col])) {
+                    <img
+                      [ngSrc]="item[col]"
+                      width="32"
+                      height="32"
+                      class="rounded-circle avatar-xs"
+                      alt="img"
+                    />
+                  }
+                  @case (isArraysOfString(item[col])) {
+                    @for (perm of item[col]; track perm) {
+                      <span class="badge me-1" [ngClass]="getBadgeClass(perm)">
+                        {{ perm }}
+                      </span>
+                    }
+                  }
+                  @default {
+                    <span [class]="getStatusClass(item[col])">{{ item[col] }}</span>
+                  }
+                }
+              </td>
+            }
+
+            @if (actions().length > 0) {
+              <td>
+                <ul class="list-unstyled hstack gap-1 mb-0">
+                  @for (action of actions(); track action.label) {
+                    <li
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      [title]="action.label | translate"
+                    >
+                      <button (click)="action.doAction(item)" class="btn btn-sm btn-outline-light">
+                        <i [class]="action.icon + ' me-1'"></i>
+                      </button>
+                    </li>
+                  }
+                </ul>
+              </td>
+            }
+          </tr>
+        }
+      } @else {
+        <tr>
+          <td [attr.colspan]="columns().length + (withCheckBox() ? 1 : 0) + (actions().length > 0 ? 1 : 0)">
+            <div class="text-center p-4 empty-table">
+              <i class="fa fa-inbox fs-1 text-muted mb-2"></i>
+              <p class="mb-0 text-muted">Aucune donnée disponible</p>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination -->
+<div class="d-flex justify-content-end mt-3">
+  <ul class="pagination pagination-rounded">
+    <li class="page-item" [class.disabled]="currentPage() === 1">
+      <button class="page-link" (click)="changePage(currentPage() - 1)">
+        <i class="bx bx-left-arrow-alt"></i>
+      </button>
+    </li>
+
+    @for (page of visiblePages; track page) {
+      <li class="page-item" [class.active]="page === currentPage()">
+        <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+      </li>
+    }
+
+    <li class="page-item" [class.disabled]="currentPage() === totalPages">
+      <button class="page-link" (click)="changePage(currentPage() + 1)">
+        <i class="bx bx-right-arrow-alt"></i>
+      </button>
+    </li>
+  </ul>
+</div>

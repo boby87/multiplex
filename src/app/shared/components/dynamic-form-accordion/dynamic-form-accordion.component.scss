@@ -1,0 +1,68 @@
+// Conteneur principal pour les items de l'accordéon
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; // Espace vertical entre chaque section
+}
+
+// Style de base pour chaque section de l'accordéon
+.accordion-item {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 0.5rem; // Coins arrondis
+  overflow: hidden; // Crucial pour que les enfants ne dépassent pas les coins arrondis et pour l'animation
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  // Style appliqué quand la section est ouverte (classe .active)
+  &.active {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: #dee2e6;
+  }
+}
+
+// L'en-tête cliquable de chaque section
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none; // Empêche la sélection du texte du titre au double-clic
+
+  h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #343a40;
+    margin: 0;
+  }
+}
+
+// L'icône chevron
+.accordion-icon {
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); // Animation de rotation très douce
+}
+
+// Fait pivoter l'icône de 180 degrés quand la section est active
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+// Le conteneur du contenu, caché par défaut
+.accordion-content {
+  max-height: 0; // C'est la propriété clé pour cacher le contenu
+  overflow: hidden;
+  // L'animation de la hauteur pour un effet de déploiement fluide
+  transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+// Quand la section est active, on donne une hauteur maximale au contenu pour qu'il s'affiche
+.accordion-item.active .accordion-content {
+  max-height: 2000px; // Une valeur arbitrairement grande qui ne limitera jamais votre contenu
+}
+
+// Un conteneur interne pour le contenu afin que le padding n'interfère pas avec l'animation `max-height`
+.accordion-content-inner {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  border-top: 1px solid #e9ecef; // Ligne de séparation fine
+}

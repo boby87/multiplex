@@ -1,0 +1,58 @@
+<!-- operation-node.component.html -->
+<div class="d-flex align-items-center justify-content-between mb-2 border rounded p-2">
+  <div class="d-flex align-items-center flex-grow-1 me-3">
+
+    <!-- Handle -->
+    <i class="fa fa-grip-vertical text-muted me-2 cursor-move"></i>
+
+    <!-- Checkbox obligatoire -->
+    <div class="form-check me-3">
+      <label class="form-check-label text-muted">Optionnel
+        <input type="checkbox" class="form-check-input" [checked]="!operation.mandatory" (change)="toggleMandatory()" />
+      </label>
+    </div>
+
+    <!-- Nom -->
+    <input type="text" class="form-control  me-3" [value]="operation.name" (change)="updateName($any($event.target).value)" />
+
+    <!-- Badges -->
+    <div class="d-flex align-items-center gap-2">
+      @if (operation.isProcess) {
+        <span class="badge bg-primary p-2"><i class="fa fa-folder  me-1"></i>Conteneur</span>
+      } @else {
+        <span class="badge bg-success p-2"><i class="fa fa-tasks me-1"></i>Tâche</span>
+      }
+
+      @if (pocede() > 0) {
+        <span class="badge bg-warning p-2 text-dark">
+          <i class="fa fa-cogs me-1"></i>
+          {{ operation.procedes.length }} procédé{{ operation.procedes.length > 1 ? 's' : '' }}
+        </span>
+      } @else if (!operation.isProcess) {
+        <span class="badge bg-secondary p-2">
+          <i class="fa fa-exclamation-triangle me-1"></i>Non configurée
+        </span>
+      }
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="d-flex align-items-center gap-2 ms-3">
+    @if (operation.isProcess) {
+      <button type="button" class="btn  btn-outline-primary" (click)="addChild()" title="Ajouter une tâche enfant">
+        <i class="fa fa-plus"></i>
+      </button>
+    } @else {
+      <button type="button" class="btn  btn-outline-primary" title="Configurer procédés">
+        <i class="fa fa-cogs"></i>
+      </button>
+    }
+    <button type="button" class="btn  btn-outline-secondary" (click)="toggleType()" title="Basculer conteneur/tâche">
+      <i class="fa fa-exchange-alt"></i>
+    </button>
+    <button type="button" class="btn  btn-outline-danger" (click)="remove()" title="Supprimer">
+      <i class="fa fa-trash-alt"></i>
+    </button>
+  </div>
+</div>
+

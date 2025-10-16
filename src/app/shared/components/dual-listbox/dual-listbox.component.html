@@ -1,0 +1,105 @@
+<div
+  class="dual-listbox"
+  [attr.name]="name()"
+  role="group"
+  [attr.aria-disabled]="disabled"
+  [class.disabled]="disabled"
+>
+  <div class="row">
+    <!-- DISPONIBLES -->
+    <div class="col-md-5">
+      <input
+        type="text"
+        class="form-control form-control-sm mb-2"
+        placeholder="Rechercher..."
+        [ngModel]="searchLeft()"
+        (ngModelChange)="searchLeft.set($event)"
+        [disabled]="disabled"
+        aria-label="Rechercher dans la liste des éléments disponibles"
+      />
+      <div
+        [id]="availableListId"
+        cdkDropList
+        [cdkDropListConnectedTo]="[selectedListId]"
+        [cdkDropListDisabled]="disabled"
+        (cdkDropListDropped)="onDrop($event)"
+        class="list-group border p-2"
+        [attr.aria-label]="'Éléments disponibles ' + name()"
+      >
+        @for (option of filteredAvailable(); track option.key) {
+          <div
+            class="list-group-item list-group-item-action"
+            cdkDrag
+            [cdkDragData]="option"
+            [cdkDragDisabled]="disabled"
+            tabindex="0"
+            (dblclick)="add(option.key)"
+            (keydown.enter)="add(option.key)"
+            (keydown.space)="add(option.key)"
+          >
+            {{ option.value }}
+          </div>
+        }
+      </div>
+      <small class="text-muted">{{ filteredAvailable().length }} disponibles</small>
+    </div>
+
+    <!-- CONTRÔLES -->
+    <div class="col-md-2 d-flex flex-column justify-content-center align-items-center gap-2">
+      <button
+        type="button"
+        [disabled]="disabled"
+        class="btn btn-outline-primary btn-sm"
+        (click)="addAll()"
+      >
+        {{ addAllLabel() }}
+      </button>
+      <button
+        type="button"
+        [disabled]="disabled"
+        class="btn btn-outline-secondary btn-sm"
+        (click)="removeAll()"
+      >
+        {{ removeAllLabel() }}
+      </button>
+    </div>
+
+    <!-- SÉLECTIONNÉS -->
+    <div class="col-md-5">
+      <input
+        type="text"
+        class="form-control form-control-sm mb-2"
+        placeholder="Filtrer sélection..."
+        [ngModel]="searchRight()"
+        (ngModelChange)="searchRight.set($event)"
+        [disabled]="disabled"
+        aria-label="Rechercher dans la liste des éléments sélectionnés"
+      />
+      <div
+        [id]="selectedListId"
+        cdkDropList
+        [cdkDropListConnectedTo]="[availableListId]"
+        [cdkDropListDisabled]="disabled"
+        (cdkDropListDropped)="onDrop($event)"
+        class="list-group border p-2"
+        [attr.aria-label]="'Éléments sélectionnés ' + name()"
+      >
+        @for (option of filteredSelected(); track option.key) {
+          <div
+            class="list-group-item list-group-item-action"
+            cdkDrag
+            [cdkDragData]="option"
+            [cdkDragDisabled]="disabled"
+            tabindex="0"
+            (dblclick)="remove(option.key)"
+            (keydown.enter)="remove(option.key)"
+            (keydown.space)="remove(option.key)"
+          >
+            {{ option.value }}
+          </div>
+        }
+      </div>
+      <small class="text-muted">{{ filteredSelected().length }} sélectionnés</small>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,220 @@
+<ng-container [formGroup]="formGroup()">
+  @if (field().label && field().controlType!== 'checkbox') {
+    <label [for]="field().key" class="form-label text-muted"
+    >{{ field().label  | translate }}
+      @if (field().required) {
+        <span class="text-red-500">*</span>
+      }
+    </label>
+  }
+
+  <div class="custom-input-wrapper my-2">
+    @if (field().icon && field().controlType!== 'checkbox') {
+      <i class="{{ field().icon }}"></i>
+    }
+
+    @switch (field().controlType) {
+      @case ('textbox') {
+        <input
+          [type]="field().type"
+          [class]="'form-control ' + field().className"
+          [formControlName]="field().key"
+          [readonly]="field().readonly"
+          [id]="field().key"
+          [ngClass]="{
+            'is-invalid': controls[field().key]['touched'] && controls[field().key].errors,
+          }"
+          [placeholder]="' ' + (field().placeholder | translate)"
+        />
+      }
+      @case ('password') {
+        <input
+          [type]="field().type"
+          [class]="'form-control ' + field().className"
+          [formControlName]="field().key"
+          [id]="field().key"
+          [readonly]="field().readonly"
+          [ngClass]="{
+            'is-invalid': controls[field().key].touched && controls[field().key].errors,
+          }"
+          [placeholder]="' ' + (field().placeholder | translate)"
+        />
+        <button
+          type="button"
+          class="password-toggle btn-icon border-0 bg-transparent p-0"
+          (click)="field().toggleType()"
+          [attr.aria-label]="
+            field().type === 'text' ? 'Masquer le mot de passe' : 'Afficher le mot de passe'
+          "
+        >
+          <i [ngClass]="field().type === 'text' ? 'bx bx-show' : 'bx bx-hide'"></i>
+        </button>
+      }
+      @case ('textarea') {
+        <textarea
+          [class]="'form-control ' + field().className"
+          [formControlName]="field().key"
+          [id]="field().key"
+          [readonly]="field().readonly"
+          rows="6"
+          [ngClass]="{
+            'is-invalid': controls[field().key].touched && controls[field().key].errors,
+          }"
+          [placeholder]="' ' + (field().placeholder | translate)"
+        ></textarea>
+      }
+      @case ('select') {
+        <select
+          aria-label="Default select example"
+          [class]="'form-select ' + field().className"
+          [formControlName]="field().key"
+          [id]="field().key"
+          [ngClass]="{
+            'is-invalid': controls[field().key].touched && controls[field().key].errors,
+          }"
+        >
+          <option value=""></option>
+          @for (opt of field().options; track opt.key) {
+            <option [value]="opt.key">{{ opt.value | translate }}</option>
+          }
+        </select>
+      }
+      @case ('checkbox') {
+        <div class="d-flex align-items-center mt-2">
+          <label class="toggle-container me-3">
+            <input
+              type="checkbox"
+              [formControlName]="field().key"
+              [id]="field().key + '_' + field().key"
+              class="toggle-checkbox"
+            />
+            <span class="toggle-slider"></span>
+          </label>
+
+          <label
+            class="form-check-label d-flex align-items-center"
+            [for]="field().key + '_' + field().key">
+            @if (field().icon){
+            <i [class]=" field().icon + ' fs-4 me-2'"></i>
+            }
+            <span>{{ field().label | translate}}</span>
+          </label>
+        </div>
+      }
+      @case ('radio') {
+        @for (opt of field().options; track opt.key) {
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              class="form-check-input"
+              [id]="field().key + '_' + opt.key"
+              [formControlName]="field().key"
+              [value]="opt.key"
+            />
+            <label class="form-check-label" [for]="field().key + '_' + opt.key">
+              {{ opt.value }}
+            </label>
+          </div>
+        }
+      }
+      @case ('date') {
+        <input
+          type="date"
+          class="form-control"
+          [formControlName]="field().key"
+          [id]="field().key"
+          [ngClass]="{
+            'is-invalid': controls[field().key].touched && controls[field().key].errors,
+          }"
+        />
+      }
+      @case ('otp') {
+        <div class="otp-field">
+          <input
+            [type]="field().type"
+            [id]="field().key"
+            [maxlength]="field().maxlength"
+            [formControlName]="field().key"
+            (keydown)="onKeyDown($event, field().key)"
+            (paste)="onPaste($event)"
+          />
+        </div>
+      }
+
+      @case ('file') {
+        <label class="upload-box">
+          <input
+            [type]="field().type"
+            (change)="onFileChange($event)"
+            [accept]="field().accept"
+            class="d-none"
+          />
+
+          @if (displayUrl) {
+            <div class="w-100">
+              <div class="preview-container">
+                @if (isDisplayingImage()) {
+                  <img [src]="displayUrl | safe" alt="Aperçu de l'image" />
+                } @else if (isDisplayingVideo()) {
+                  <video [src]="displayUrl | safe" controls></video>
+                } @else if (isDisplayingPdf()) {
+                  <object [data]="displayUrl | safe" type="application/pdf">
+                    <p>Aperçu PDF non supporté.</p>
+                  </object>
+                }
+              </div>
+
+              <div class="file-name-display">
+                {{ displayFileName }}
+              </div>
+            </div>
+          } @else {
+            <div class="upload-content">
+              <i class="{{ field().icon || 'fas fa-upload' }}"></i>
+              <span>Choisir un fichier</span>
+            </div>
+          }
+        </label>
+      }
+      @case ('multiselect') {
+        <app-multi-select
+          [formControlName]="field().key"
+          [withPrincipalElement]="field().withPrincipalValue"
+          [options]="field().options"
+          [class]="'form-control ' + field().className"
+          [ngClass]="{
+            'is-invalid': controls[field().key].touched && controls[field().key].errors,
+          }"
+        ></app-multi-select>
+      }
+      @case ('dual-listbox') {
+        <app-dual-listbox
+          [options]="field().options"
+          [label]="field().label"
+          [name]="field().key"
+          [formControlName]="field().key"
+        ></app-dual-listbox>
+      }
+      @default {
+        <input
+          [type]="field().type || 'text'"
+          [formControlName]="field().key"
+          [id]="field().key"
+          class="form-control"
+          [placeholder]="' ' + (field().placeholder | translate)"
+        />
+      }
+    }
+  </div>
+  @if (controls[field().key].errors && controls[field().key].touched) {
+    <div class="invalid-feedback d-block mt-1">
+      @if (controls[field().key].errors?.['required'] ||
+      controls[field().key].errors?.['lowercaseUsername'] ||
+      controls[field().key].errors?.['phoneE164'] ||
+      controls[field().key].errors?.['emailOrPhone'] ||
+      controls[field().key].errors?.[field().key]) {
+        {{ controls[field().key].errors | validatorErrorMessage }}
+      }
+    </div>
+  }
+</ng-container>

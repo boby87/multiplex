@@ -1,0 +1,12 @@
+<form [formGroup]="form()">
+  <div class="row">
+    @for (field of fields(); track field.key) {
+      <app-dynamic-field
+        [class]="'mb-3 ' + field.classColumn"
+        [field]="field"
+        [formGroup]="form()"
+      ></app-dynamic-field>
+      <!-- message d’erreur EN DEHORS du wrapper -->
+    }
+  </div>
+</form>

@@ -1,0 +1,174 @@
+/* Conteneur général */
+.form-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  color: #374151; /* gris foncé moderne */
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+
+
+.form-control:focus {
+  border-color: #6366f1; /* Indigo */
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+}
+
+/* Password toggle */
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.custom-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #374151;
+}
+
+.btn-outline:hover {
+  background: #f3f4f6;
+}
+
+.btn-primary {
+  background: #6366f1;
+  border: none;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #4f46e5;
+}
+// Le conteneur qui sert de "cadre" pour l'aperçu
+// Fichier : dynamic-field.component.scss
+
+// Variable pour la personnalisation facile
+$preview-border-color: #e2e8f0; // Gris clair
+$preview-background-color: #f8fafc; // Gris très clair
+
+// Style de la boîte cliquable principale
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed $preview-border-color;
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  text-align: center;
+
+  &:hover {
+    background-color: $preview-background-color;
+    border-color: #cbd5e1; // Gris un peu plus foncé
+  }
+
+  // Style de l'icône et du texte "Choisir un fichier"
+  .upload-content {
+    color: #64748b; // Gris moyen
+    font-size: 1.5rem;
+
+    span {
+      display: block;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+
+
+// Le conteneur qui sert de "cadre" pour l'aperçu
+
+// Style du nom du fichier sous le cadre
+.file-name-display {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #475569;
+
+  // Gère les noms de fichiers trop longs
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+// Le conteneur qui sert de "cadre" pour l'aperçu
+.preview-container {
+  width: 100%;
+  margin-top: 1rem;
+
+  // On conserve les proportions du cadre
+  aspect-ratio: 16 / 9;
+
+  border: 1px solid $preview-border-color;
+  background-color: $preview-background-color;
+  border-radius: 6px;
+  overflow: hidden;
+
+  // On conserve Flexbox pour le centrage
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // --- CORRECTION CI-DESSOUS ---
+  // Cible tous les types d'aperçus
+  img, video, object {
+    display: block;
+
+    // On se fie UNIQUEMENT aux propriétés max- pour contraindre la taille.
+    // L'élément ne dépassera jamais son conteneur.
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  // Cette règle reste la même et est toujours aussi importante
+  img, video {
+    object-fit: contain;
+  }
+}
+// Dans votre fichier src/styles.scss
+
+.text-whatsapp {
+  color: #25D366 !important; // Le vert officiel de WhatsApp
+}

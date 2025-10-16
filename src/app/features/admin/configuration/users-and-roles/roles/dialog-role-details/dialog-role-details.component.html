@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="card-header">
+    <h2 mat-dialog-title>Détails du Rôle : {{ data.name }}</h2>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Fermer la boîte de dialogue">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="card-content">
+    @if (data.id) {
+      <p><strong>ID :</strong> {{ data.id }}</p>
+    }
+
+    @if (data.description) {
+      <p><strong>Description :</strong> {{ data.description }}</p>
+    }
+
+    @if (getCompanies().length > 0) {
+      <h3>Compagnies Associées :</h3>
+      <mat-list dense>
+        @for (company of data.companies; track company) {
+          <mat-list-item>{{ company }}</mat-list-item>
+        }
+      </mat-list>
+    }
+
+    @if (rolePermissionEntries().length > 0) {
+      <mat-divider class="my-3"></mat-divider>
+      <h3>Permissions du Rôle :</h3>
+      <div class="row">
+        @for (entry of rolePermissionEntries(); track entry.key) {
+          <div class="mb-3 col-md-6">
+            <h4>{{ entry.key }}</h4>
+            <mat-list dense>
+              @for (perm of entry.value; track perm) {
+                <mat-list-item>{{ perm }}</mat-list-item>
+              }
+            </mat-list>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()">Fermer</button>
+  </mat-dialog-actions>
+</div>
